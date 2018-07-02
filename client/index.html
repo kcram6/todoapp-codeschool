@@ -1,0 +1,41 @@
+<!doctype html>
+    <html>
+        <head>
+            <title>To Do</title>
+            <meta charset='utf-8'>
+            <link href='style.css' rel='stylesheet' type='text/css'>
+        </head>
+        <body>
+            <div id='app'>
+                <header class='header'>
+                    <h1>todos</h1>
+                    <input type='text' class='new-todo' placeholder='enter todo'>
+                </header>
+
+                <section class='main'>
+                    <ul class='todo-list'>
+                        <li :class='{ completed: todo.completed }' class='todo' v-for='todo in todos'>
+                            <div class='view'>
+                                <input class='toggle' type='checkbox' :checked='todo.completed'>
+                                <label>{{ todo.title }}</label>
+                                <button class="destroy"></button>
+                            </div>
+                            <input class='edit' type='text'>
+                        </li>
+                        
+                    </ul>
+                </section>
+
+                <footer class='footer'>
+                    <span class='todo-count'>
+                        <strong>{{  }}</strong>
+                    </span>
+
+                </footer>
+
+            </div>
+            <script src='vue.js'></script>
+            <script src='main.js'></script>
+        </body>
+    </html>
+    
