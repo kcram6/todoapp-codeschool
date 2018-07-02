@@ -6,19 +6,19 @@
             <link href='style.css' rel='stylesheet' type='text/css'>
         </head>
         <body>
-            <div id='app'>
+            <div id='app' v-cloak>
                 <header class='header'>
                     <h1>todos</h1>
-                    <input type='text' class='new-todo' placeholder='enter todo'>
+                    <input type='text' v-model='newTodo' class='new-todo' placeholder='enter todo'  @keyup.enter='addTodo'>
                 </header>
 
                 <section class='main'>
                     <ul class='todo-list'>
                         <li :class='{ completed: todo.completed }' class='todo' v-for='todo in todos'>
                             <div class='view'>
-                                <input class='toggle' type='checkbox' :checked='todo.completed'>
+                                <input class='toggle' type='checkbox' v-model='todo.completed'>
                                 <label>{{ todo.title }}</label>
-                                <button class="destroy"></button>
+                                <button @click='deleteTodo(todo)' class="destroy"></button>
                             </div>
                             <input class='edit' type='text'>
                         </li>

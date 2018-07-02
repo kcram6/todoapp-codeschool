@@ -1,16 +1,19 @@
 new Vue({
     el: '#app',
     data: {
-        todos: [
-            {
-                title: 'my todo',
-                completed: false
-            },
-            {
-                title:'another item',
-                completed: true
-            }
-        ]
+        newTodo: '',
+        todos:[]
     },
-
+    methods: {
+        addTodo() {
+            this.todos.unshift({
+                title: this.newTodo,
+                completed: false
+            })
+            this.newTodo = ''
+        },
+        deleteTodo(todo) {
+            this.todos.splice(this.todos.indexOf(todo), 1)
+        }
+    }
 })
