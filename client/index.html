@@ -14,13 +14,13 @@
 
                 <section class='main'>
                     <ul class='todo-list'>
-                        <li :class='{ completed: todo.completed }' class='todo' v-for='todo in todos'>
+                        <li :class='{ completed: todo.completed, editing: todo == editedTodo }' class='todo' v-for='todo in todos'>
                             <div class='view'>
                                 <input class='toggle' type='checkbox' v-model='todo.completed'>
-                                <label>{{ todo.title }}</label>
+                                <label @dblclick='editTodo(todo)' >{{ todo.title }}</label>
                                 <button @click='deleteTodo(todo)' class="destroy"></button>
                             </div>
-                            <input class='edit' type='text'>
+                            <input @keyup.enter='saveEditedTodo(todo)' @blur='saveEditedTodo(todo)'  @keyup.esc='cancelEdit(todo)'  v-todo-focus='todo === editedTodo' class='edit' v-model='todo.title' type='text'>
                         </li>
                         
                     </ul>
