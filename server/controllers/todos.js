@@ -1,3 +1,5 @@
+const TodoModel = require('../models/todos')
+
 const controller = {
     listTodos: (req, res) => 
         TodoModel.find()
@@ -24,3 +26,4 @@ const controller = {
 
 }
 
+module.exports = controller

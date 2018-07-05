@@ -3,20 +3,30 @@ new Vue({
     data: {
         newTodo: '',
         editedTodo: null,
-        todos: [
-            {
-                title: 'my todo',
-                completed: false
-            }
-        ]
+        todos: [],
+
+    },
+    created() {
+        fetch('http://localhost:3000/todos')
+            .then(res => res.json())
+            .then(todos => this.todos = todos)
     },
     methods: {
         addTodo() {
-            this.todos.unshift({
-                title: this.newTodo,
-                completed: false
+            fetch('http://localhost:3000/todos', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: this.newTodo,
+                })
             })
-            this.newTodo = ''
+                .then(res => res.json())
+                .then(todo => {
+                    this.todos.unshift(todo)
+                    this.newTodo = ''
+                })
         },
         deleteTodo(todo) {
             this.todos.splice(this.todos.indexOf(todo), 1)
