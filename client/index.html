@@ -1,41 +1,42 @@
-<!doctype html>
-    <html>
-        <head>
-            <title>To Do</title>
-            <meta charset='utf-8'>
-            <link href='style.css' rel='stylesheet' type='text/css'>
-        </head>
-        <body>
-            <div id='app' v-cloak>
-                <header class='header'>
-                    <h1>todos</h1>
-                    <input type='text' v-model='newTodo' class='new-todo' placeholder='enter todo'  @keyup.enter='addTodo'>
-                </header>
+<html>
 
-                <section class='main'>
-                    <ul class='todo-list'>
-                        <li :class='{ completed: todo.completed, editing: todo == editedTodo }' class='todo' v-for='todo in todos'>
-                            <div class='view'>
-                                <input class='toggle' type='checkbox' v-model='todo.completed'>
-                                <label @dblclick='editTodo(todo)' >{{ todo.title }}</label>
-                                <button @click='deleteTodo(todo)' class="destroy"></button>
-                            </div>
-                            <input @keyup.enter='saveEditedTodo(todo)' @blur='saveEditedTodo(todo)'  @keyup.esc='cancelEdit(todo)'  v-todo-focus='todo === editedTodo' class='edit' v-model='todo.title' type='text'>
-                        </li>
-                        
-                    </ul>
-                </section>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css">
+</head>
 
-                <footer class='footer'>
-                    <span class='todo-count'>
-                        <strong>{{  }}</strong>
-                    </span>
+<body>
 
-                </footer>
+<div id="app" v-cloak>
 
-            </div>
-            <script src='vue.js'></script>
-            <script src='main.js'></script>
-        </body>
-    </html>
-    
+	<header class="header">
+		<h1>todos</h1>
+		<input class="new-todo" placeholder="Enter todo" v-model="newTodo" @keyup.enter="addTodo">
+	</header>
+
+	<section class="main">
+		<ul class="todo-list">
+			<li class="todo" :class="{ completed: todo.completed, editing: todo == editedTodo }" v-for="todo in todos">
+				<div class="view">
+					<input class="toggle" type="checkbox" :checked="todo.completed" @click="checkTodo(todo)">
+					<label @dblclick="editTodo(todo)">{{ todo.title }}</label>
+					<button class="destroy" @click="deleteTodo(todo)"></button>
+				</div>
+				<input class="edit" v-model="todo.title" v-todo-focus="todo == editedTodo" type="text" @keyup.enter="doneEdit(todo)" @blur="doneEdit(todo)" @keyup.esc="cancel(todo)">
+			</li>
+		</ul>
+	</section>
+
+	<footer class="footer">
+		<span class="todo-count">
+			<strong><strong>Uncompleted Tasks: {{ remaining }}</strong></strong>
+		</span>
+	</footer>
+
+</div>
+
+<script src="vue.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
