@@ -76,6 +76,16 @@ new Vue({
 			this.editedTodo = null
 			todo.title = this.cachedTitle
 		},
+		
+	},
+	filters: {
+		pluralize(n) {
+			if (n === 1) {
+				return 'task'
+			} else {
+				return 'tasks'
+			}
+		}
 	},
 	directives: {
 		'todo-focus'(el, binding) {
